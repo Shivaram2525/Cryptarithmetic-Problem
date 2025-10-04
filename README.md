@@ -1,6 +1,10 @@
 <h1>ExpNo 8 : Solve Cryptarithmetic Problem,a CSP(Constraint Satisfaction Problem) using Python</h1> 
-<h3>Name:               </h3>
-<h3>Register Number/Staff Id:       </h3>
+
+```
+Name         : Shivaram M.
+Register No. : 212223040195
+```
+
 <H3>Aim:</H3>
 <p>
     To solve Cryptarithmetic Problem,a CSP(Constraint Satisfaction Problem) using Python
@@ -77,6 +81,53 @@ SEND = 9567<br>
 MORE = 1085<br>
 <hr>
 MONEY = 10652<br>
+
+## Code:
+```
+from itertools import permutations
+
+def solve_cryptarithmetic(word1, word2, result):
+    letters = list(set(word1 + word2 + result))
+    if len(letters) > 10:
+        print("Too many unique letters (max 10).")
+        return None
+
+    for perm in permutations(range(10), len(letters)):
+        mapping = dict(zip(letters, perm))
+
+        if mapping[word1[0]] == 0 or mapping[word2[0]] == 0 or mapping[result[0]] == 0:
+            continue
+
+        n1 = int("".join(str(mapping[c]) for c in word1))
+        n2 = int("".join(str(mapping[c]) for c in word2))
+        n3 = int("".join(str(mapping[c]) for c in result))
+
+        if n1 + n2 == n3:
+            return mapping, n1, n2, n3
+
+    return None
+
+w1 = input("Enter first word: ").upper()
+w2 = input("Enter second word: ").upper()
+res = input("Enter result word: ").upper()
+
+solution = solve_cryptarithmetic(w1, w2, res)
+
+if solution:
+    mapping, n1, n2, n3 = solution
+    print(f"Solution found:")
+    print(f"{w1} = {n1}")
+    print(f"{w2} = {n2}")
+    print(f"{res} = {n3}")
+    print("Mapping:", mapping)
+else:
+    print("No solution found.")
+
+```
+## Output:
+<img width="1012" height="226" alt="output" src="https://github.com/user-attachments/assets/2f3c37ab-b284-4db1-8f37-09d356f46b50" />
+<img width="1680" height="1050" alt="code" src="https://github.com/user-attachments/assets/f003dbd0-88bd-4aeb-b985-826dd952c932" />
+
 <hr>
 <h2>Result:</h2>
 <p> Thus a Cryptarithmetic Problem was solved using Python successfully</p>
